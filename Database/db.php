@@ -1,21 +1,20 @@
 <?php
+function OpenCon()
+ {
+ $dbhost = "localhost";
+ $dbuser = "rp783";
+ $dbpass = "Shilpa@6303";
+ $db = "sql1.njit.edu";
+ $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
+ 
+ return $conn;
+ }
 
-/*** mysql hostname ***/
-$hostname = 'sql1.njit.edu';
-
-/*** mysql username ***/
-$username = 'rp783';
-
-/*** mysql password ***/
-$password = 'Shilpa@6303';
-
-try {
-    $dbh = new PDO("mysql:host=$hostname;dbname=mysql", $username, $password);
-    /*** echo a message saying we have connected ***/
-    echo 'Connected to database';
-    }
-catch(PDOException $e)
-    {
-    echo $e->getMessage();
-    }
+ echo "Success!";
+ 
+function CloseCon($conn)
+ {
+ $conn -> close();
+ }
+   
 ?>
