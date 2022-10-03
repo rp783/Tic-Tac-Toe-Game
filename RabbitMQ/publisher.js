@@ -1,28 +1,22 @@
-#!/usr/bin/env node
+var express = require('express');
+var app = express();
+var amqp = require('amqp/callback_api');
 
-var amqp = require('amqplib/callback_api');
+const port = 3001;
 
-amqp.connect('amqp://localhost', function(error0, connection) {
-    if (error0) {
-        throw error0;
-    }
-    connection.createChannel(function(error1, channel) {
-        if (error1) {
-            throw error1;
-        }
+amqp.connect('amqp://localhost', (error, connection) => {
+    connection.createChannel((error, channel) => { 
+        var queue = 'Hello';
+        var message = { type: '2', content: 'Hello WOrld' };
 
-        var queue = 'hello';
-        var msg = 'Hello World!';
-
-        channel.assertQueue(queue, {
-            durable: false
-        });
-        channel.sendToQueue(queue, Buffer.from(msg));
-
-        console.log(" [x] Sent %s", msg);
+        channel.assertQueue(queue, {durable: false});
+        channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
+        console.log('Message was successfully sent');
     });
-    setTimeout(function() {
+
+    setTimeout(() => {
         connection.close();
-        process.exit(0);
-    }, 500);
-});
+        process.exit(0); }, 500);
+    
+app.listen(port, () => console.log('App listening on port ${port}!'))
+    })
