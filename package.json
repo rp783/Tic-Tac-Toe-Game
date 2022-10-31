@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "amqp": "^0.2.7",
+    "type": "module"
+  }
+  
+}
+
