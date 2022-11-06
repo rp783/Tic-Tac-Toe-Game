@@ -1,3 +1,3 @@
 #! /bin/bash
-systemctl start mysql
-
+sudo systemctl start mysql
+sudo systemctl status mysql
