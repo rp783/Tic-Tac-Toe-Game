@@ -7,6 +7,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+
 const db = mysql.createPool({
   host: "192.168.1.114",
   user: "dharmesh",
@@ -15,21 +16,21 @@ const db = mysql.createPool({
 });
 app.use(bodyParser.urlencoded({extended: true}));
 
-console.log("DataBase Connected");
+console.log("Database Connected");
 app.post('/register', (req, res)=>{ 
 
-  const ID = req.body.ID;
   const UserName = req.body.UserName;
   const Password = req.body.Password;
   const FirstName = req.body.FirstName;
   const LastName = req.body.LastName;
   const Email = req.body.Email;
 
-  const sqlInsert = "INSERT INTO UserTable( ID, UserName, Password, FirstName, LastName, Email) VALUES (?,?,?,?,?,?)";
-  db.query(sqlInsert, [ID, UserName, Password, FirstName, LastName, Email], (err, result)=> {
+  const sqlInsert = "INSERT INTO UserTable( UserName, Password, FirstName, LastName, Email) VALUES (?,?,?,?,?)";
+  db.query(sqlInsert, [ UserName, Password, FirstName, LastName, Email], (err, result)=> {
     console.log(err);
   })
 })
+
 app.post('/login',(req, res)=> {
 
   const UserName = req.body.UserName;
