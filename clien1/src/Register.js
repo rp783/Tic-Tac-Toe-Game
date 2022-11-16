@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios, { Axios } from 'axios';
+import React, { useState } from 'react';
+//import axios, { Axios } from 'axios';
 import {useNavigate} from 'react-router-dom';
-import async from "async"
-
-
+import send from './send';
 
 
 function Register() {
@@ -15,10 +13,13 @@ function Register() {
     const [FirstName, setFirstName] = useState("");
     const [LastName, setLastName] = useState("");
     const [Email, setEmail] = useState("");
+    const msg = {UserName,Password,FirstName,LastName,Email};
+    const exchange = 'Test';
+    const queue = 'Test2'
+    send.sendmsg(exchange,queue,msg);
+
     const register = () => {
-        axios.post("http://192.168.1.112:5001/register ", {
-        
-      
+         ("/", {
           //ID:ID,
           UserName: UserName,
           Password: Password,
@@ -26,14 +27,9 @@ function Register() {
           LastName: LastName,
           Email: Email,
            }).then (() =>{
-            alert("Register Successful");
-
            });
       };
-   
- 
 
-              
     return(
     <div className='App'>
     <h1>Registration</h1>
@@ -68,25 +64,12 @@ function Register() {
    }} />
 
    <button onClick={register}>Submit</button>
-   
    <button onClick={() => {navigate("/Login")}}> Sign in </button>
 
    </div>
    </div>
-   
     
     );
 }
-/*
-const addEntry = async(UserName, Password, FirstName, LastName, Email);{
-  const queue = 'register';
-  const conn = await amqplib.connect('amqp://admin:admin@192.168.1.111');
-  const ch = await conn.createChannel();
-  await ch.assertQueue(queue);
-  const qmsg = JSON.stringify({UserName, Password, FirstName, LastName, Email});
-  return ch.sendToQueue(queue, Buffer.from(qmsg, 'utf8'));
-}
 
-*/
 export default Register;
-

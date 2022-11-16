@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios, { Axios } from 'axios';
 
-
 function Login() {
     let navigate = useNavigate();
     const [UserName, setUserName] = useState("");
@@ -48,4 +47,3 @@ function Login() {
 }
 
 export default Login;
-

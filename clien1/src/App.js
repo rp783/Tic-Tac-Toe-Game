@@ -3,9 +3,11 @@ import './App.css';
 import axios, { Axios } from 'axios';
 import {useNavigate} from "react-router-dom";
 import { BrowserRouter as Router, Routes,Route,Link,  } from 'react-router-dom';
-import Register from './pages/Register';
+import Register from './Register';
 import Login from './pages/Login';
 import Home from './pages/home';
+
+
 
 function App() {
   return(
@@ -23,6 +25,7 @@ function App() {
       </Routes>
     </Router>
   );
-
 }
+
+
 export default App;
