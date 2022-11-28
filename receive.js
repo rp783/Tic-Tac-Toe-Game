@@ -2,7 +2,7 @@
 
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://aahnik:ap28ap@192.168.1.111', function(error0, connection) {
+amqp.connect('amqp://admin:admin@10.192.231.72', function(error0, connection) {
     if (error0) {
         throw error0;
     }
@@ -11,7 +11,7 @@ amqp.connect('amqp://aahnik:ap28ap@192.168.1.111', function(error0, connection) 
             throw error1;
         }
 
-        var queue = 'IT490-BackEnd';
+        var queue = 'hello1';
 
         channel.assertQueue(queue, {
             durable: false
