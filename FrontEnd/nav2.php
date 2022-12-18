@@ -1,3 +1,6 @@
+<?php
+require("./function2.php");
+?>
 <!doctype html>
 <html lang="en" >
 
@@ -18,12 +21,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
+      <li class="nav-item">
+          <a class="nav-link" href="./Index.php">Home</a>
+        </li> 
         <li class="nav-item">
-          <a class="nav-link" href="./Login.php">Login</a>
+          <a class="nav-link" href="./profile.php">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./Registration.php">Register</a>
-        </li>
+          <a class="nav-link" href="./logout.php">Logout</a>
+        </li>      
+
           </ul>
         </li>
       </ul>
@@ -31,4 +38,9 @@
   </div>
 </nav>
         </head>
+
         <body>
+
+<html>   
+ 
+  

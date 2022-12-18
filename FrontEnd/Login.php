@@ -1,10 +1,12 @@
 <?php session_start(); 
-require("./nav.php");
+require_once("./nav.php");
 ?>
 
 
 </head>
 <body>
+<style>
+</style>
     <div class="center">
         <h1>Login</h1>
         <form method="post">
@@ -28,8 +30,7 @@ require_once('./rmq/rabbitMQLib.php');
 $client = new rabbitMQClient("./rmq/login.ini", "testServer");
 if (isset($_SESSION['username']))
 {
-	echo "<meta http-equiv='refresh' content='2;URL=index.php'>";
-}
+	header("location: Index.php");}
 
 if (isset($_POST['username']) and isset($_POST['password']))
 {
@@ -38,17 +39,19 @@ if (isset($_POST['username']) and isset($_POST['password']))
 	switch ($response['msg'])
 	{
 		case 'Username or password are invalid. Please retry':
-			echo "<meta http-equiv='refresh' content='2;URL=Login.php'>";
+            echo "Invalid Username or Password";
+			header("Location: ./Login.php");
 			exit();
 		case 'Verified credentials':
 			$_SESSION['isVerified'] = true;
-			$_SESSION['username'] = $_POST['username'];
+			$UserName = $_SESSION['username'] = $_POST['username'];
 			unset($_POST);
-			echo "<meta http-equiv='refresh' content='2;URL=Index.php'>";
-			exit();
+			header("Location: ./Index.php");
+
 	}
 }
 ?>
-</html>
 
+<?php
+require_once "./footer.php";
 

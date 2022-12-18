@@ -39,6 +39,7 @@ require_once('./rmq/path.inc');
 require_once('./rmq/get_host_info.inc');
 require_once('./rmq/rabbitMQLib.php');
 
+
 $client = new rabbitMQClient("./rmq/register.ini", "testServer");
 if (isset($_POST['firstname']) 
 	and isset($_POST['lastname']) 
@@ -55,16 +56,18 @@ if (isset($_POST['firstname'])
 			'password'=>$password,
 			'email'=>$_POST['email'],
 			'type'=>'register');
+			
 		$response = $client->send_request($request);
+		
 	switch ($response)
 	{
 		case 'created':
-			echo 'Successfully created. Redirecting to login page in 3 seconds';
-			echo "<meta http-equiv='refresh' content='3;URL=./login.php'>";
+			echo 'Successfully created. Redirecting to login page';
+			header("Location: Login.php");
 			exit();
 		case 'notCreated':
 			echo 'Username already taken. Please re-enter different username in 3 seconds';
-			echo "<meta http-equiv='refresh' content='3;URL=registration.php'>";
+			header("Location: Registration.php");
 			exit();
 	}
 }
@@ -75,3 +78,7 @@ if (isset($_POST['firstname'])
 
 ?>
 </html>
+<?php
+require_once "./footer.php";
+
+?>
