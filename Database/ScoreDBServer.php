@@ -12,11 +12,9 @@ function requestProcessor($request)
 	$pass = 'Rutvik@6303';
 	$db = 'ProjectDB';
 	$conn = mysqli_connect($host, $user, $pass, $db);
-	$firstname = $request['firstname'];
-	$lastname = $request['lastname'];
-	$username = $request['username'];
-	$password = $request['password'];
-    $email=$request['email']; 
+	$HighScore = $request['HighScore'];
+	$username = $request['UserName'];
+
 	
 
 	if (mysqli_connect_errno())
@@ -26,24 +24,24 @@ function requestProcessor($request)
 	else
 	{
 		echo "Successfully connected to MySQL\nQuerying...\n";
-		$query = "INSERT INTO UserTable (FirstName,LastName, UserName, Password, Email) VALUES ('$firstname', '$lastname', '$username', '$password', '$email')";
-		$createUser = mysqli_query($conn, $query);
-		if ($createUser)
+		$query = "INSERT INTO Score_Table (HighScore, UserName) VALUES ('$HighScore','$username')";
+		$InsertScore = mysqli_query($conn, $query);
+		if ($InsertScore)
 		{
-			echo "created\n";
-			return 'created';
+			echo "added\n";
+			return 'added';
 		}
 		else
 		{
-			echo mysqli_error($conn) . "\n not created\n";
-			return 'notCreated';
+			echo mysqli_error($conn) . "\n not added\n";
+			return 'notAdded';
 		}
 	}
 	echo "nothing from database";
-	return 'notCreated';
+	return 'notAdded';
 }
 
-$server = new rabbitMQServer("./rmq/registerToDB.ini","testServer");
+$server = new rabbitMQServer("./rmq/localscore.ini","testServer");
 echo "Server started" . PHP_EOL;
 $server->process_requests('requestProcessor');
 exit();  
