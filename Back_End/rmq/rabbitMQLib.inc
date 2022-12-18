@@ -129,8 +129,9 @@ class rabbitMQServer
 		}
 		catch (Exception $e)
 		{
-			trigger_error("Failed to start request processor: ".$e,E_USER_ERROR); 
+			echo("Failed to start request processor: \n");
 		}
+		
 	}
 }
 
@@ -184,7 +185,7 @@ class rabbitMQClient
 			$payload = "[empty response]";
 		}
 		$this->response_queue[$uid] = $payload;
-		return false;
+		return true;
 	}
 
 	function send_request($message)
